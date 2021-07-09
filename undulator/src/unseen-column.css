@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+@media only screen and (max-width: 800px) {
+	.unseen table td:last-child, 
+	.unseen table th:last-child {display: none;}
+}
