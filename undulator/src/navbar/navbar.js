@@ -2,25 +2,51 @@ import React from 'react';
 import {
   Link
 } from "react-router-dom";
-import './navbar.css';
+// import './navbar.css';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 // Brand and toggle get grouped for better mobile display
-const NavBarHeader = () => 
-<div className="navbar-header">
-	<button type="button" className="navbar-toggle collapsed"
-		data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-		<span className="sr-only">Toggle navigation</span> <span
-			className="icon-bar"></span> <span className="icon-bar"></span> <span
-			className="icon-bar"></span>
-	</button>
-</div>
+const MenuBarHeader = () => <>
+	<Navbar.Brand href="#home">
+	<img
+	src="/images/logos/aorangi_undulator_icon.jpg"
+	width="30"
+	height="30"
+	className="d-inline-block align-top"
+	alt="Aorangi Undulator logo"
+	/>
+	</Navbar.Brand>
+	<Navbar.Toggle aria-controls="basic-navbar-nav" />
+</>
 ;
 
 // Collect the nav links, forms, and other content for toggling
-const NavBarContent = (props) => {
+const MenuBarContent = (props) => {
 	const au = props.currentEvent === 'AU';
 	const a100 =  props.currentEvent === 'A100';
 	return (
+
+	<Navbar.Collapse id="basic-navbar-nav">
+	<Nav className="mr-auto">
+		<Nav.Link href="/intro">Home</Nav.Link>
+		<NavDropdown title="ENTRY" id="basic-nav-dropdown">
+		<NavDropdown.Item href="/prices">PRICES</NavDropdown.Item>
+		<NavDropdown.Item href="/enter">ENTER</NavDropdown.Item>
+		<NavDropdown.Item href="/merchandise">MERCHANDISE</NavDropdown.Item>
+		<NavDropdown.Divider />
+		<NavDropdown.Item href="/entries-list">ENTRIES SO FAR</NavDropdown.Item>
+		</NavDropdown>
+	</Nav>
+	</Navbar.Collapse>
+	)
+	;
+}
+	const OLD = (props) => {
+		const au = props.currentEvent === 'AU';
+		const a100 =  props.currentEvent === 'A100';
+		return (
 <div className="collapse navbar-collapse"
 	id="bs-example-navbar-collapse-1">
 	<ul className="nav navbar-nav">
@@ -130,12 +156,10 @@ const NavBarContent = (props) => {
 ;
 
 
-export const NavBar = (props) =>
-<nav className="navbar navbar-default">
-	<div className="container-fluid">
-		<NavBarHeader/>
-		<NavBarContent/>
-	</div>
-</nav>
+export const MenuBar = (props) =>
+<Navbar bg="dark" expand="lg">
+	<MenuBarHeader/>
+	<MenuBarContent/>
+</Navbar>;
 
-export default NavBar;
+export default MenuBar;
