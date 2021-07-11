@@ -53,10 +53,11 @@ footer .contact span {
 	width: 35em;
 }
 
+/*
 .share-icon-col {
-	/* text-align: right; */
-	
+	text-align: right;	
 }
+*/
 
 .register-button {
 	margin: .5em;

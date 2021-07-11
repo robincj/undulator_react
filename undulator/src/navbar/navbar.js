@@ -1,13 +1,8 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link
 } from "react-router-dom";
 import './navbar.css';
-
-const tstamp = new Date().format('Ymdhis');
 
 // Brand and toggle get grouped for better mobile display
 const NavBarHeader = () => 
@@ -28,58 +23,44 @@ const NavBarContent = (props) => {
 	return (
 <div className="collapse navbar-collapse"
 	id="bs-example-navbar-collapse-1">
-	<Router>
 	<ul className="nav navbar-nav">
 
-		<li><Link to='/'>HOME</Link></li>
+		<li><Link to='/intro'>HOME</Link></li>
 
-		<li className="dropdown"><a href="#" className="dropdown-toggle"
-			data-toggle="dropdown" role="button" aria-expanded="false">ENTER <span
-				className="caret"></span></a>
+		<li className="dropdown"><button className="dropdown-toggle"
+			data-toggle="dropdown" aria-expanded="false">ENTER <span
+				className="caret"></span></button>
 
 			<ul className="dropdown-menu" role="menu">
-				<li><Link to='/information/prices'>PRICES</Link></li>
+				<li><Link to='/prices'>PRICES</Link></li>
 				<li><Link to='/enter'>ENTER</Link></li>
 				<li><Link to='/merchandise'>MERCHANDISE</Link></li>
-				<li><Link to='/information/entries'>ENTRIES SO FAR</Link></li>
+				<li><Link to='/entries-list'>ENTRIES SO FAR</Link></li>
 			</ul></li>
 
-		<li className="dropdown"><a href="#" className="dropdown-toggle"
-			data-toggle="dropdown" role="button" aria-expanded="false">EVENT
-				INFORMATION<span className="caret"></span>
-		</a>
+		<li className="dropdown">
+			<button className="dropdown-toggle"
+			data-toggle="dropdown" aria-expanded="false">EVENT INFORMATION
+				<span className="caret"></span>
+		</button>
 
 			<ul className="dropdown-menu" role="menu">
 
-				{au && <li><Link to='/information/directions'>HOW TO GET THERE</Link></li>}
-				{au && <li><Link to='/information/schedule_AU'>RACE DAY SCHEDULE</Link></li>}
-				{au && <li><Link to='/information/schedule_AU'>RACE DAY SCHEDULE</Link></li>}	
-				<li className="A100"><a href="#"
-					onClick="loadmaincontent('information/schedule_A100.php')">A100
-						RACE SCHEDULE</a></li>
+				{au && <li><Link to='/directions'>HOW TO GET THERE</Link></li>}
+				{au && <li><Link to='/schedule_AU'>RACE DAY SCHEDULE</Link></li>}
+				{a100 && <li><Link to='/schedule_A100'>A100 RACE SCHEDULE</Link></li>}
+				<li><Link to='/course_notes'>COURSE INFO &amp; MAPS</Link></li>
+				{au && <li><Link to='/what_to_expect'>WHAT TO EXPECT</Link></li>}						
+				<li><Link to='/equipment_list'>EQUIPMENT LIST</Link></li>
+				{a100 && <li><Link to='/spirit_award'>A100 Spirit Award Trophy</Link></li>}
+				<li><Link to='/prizes'>PRIZES</Link></li>
 
-				<li><a href="#"
-					onClick="loadmaincontent('information/course_notes/course_notes.php')">COURSE
-						INFO &amp; MAPS</a></li>
-
-				<li className="AU"><a href="#"
-					onClick="loadmaincontent('information/what_to_expect.php')">WHAT
-						TO EXPECT</a></li>
-						
-				<li onClick="loadmaincontent('information/equipment_list.php')"><a
-					href="#">EQUIPMENT LIST</a></li>
-
-				<li className="A100"><a href="#"
-					onClick="loadmaincontent('results/spirit_award.php')"> A100
-						Spirit Award Trophy</a></li>
-				<li><a href="#"
-					onClick="loadmaincontent('information/prizes.php')"> PRIZES</a></li>
 			</ul></li>
-
-		<li className="dropdown"><a href="#" className="dropdown-toggle"
-			data-toggle="dropdown" role="button" aria-expanded="false">RESULTS
+{/*
+		<li className="dropdown"><button className="dropdown-toggle"
+			data-toggle="dropdown" aria-expanded="false">RESULTS
 				<span className="caret"></span>
-		</a>
+		</button>
 
 			<ul className="dropdown-menu" role="menu">
 				<li onClick="loadmaincontent('results/spirit_award.php')"><a
@@ -142,9 +123,8 @@ const NavBarContent = (props) => {
 				className="img-responsive" data-toggle="tooltip" data-placement="top"
 				title="Sounds too easy? Try the Aorangi	Undulator 100"
 				src="<?php echo $banner_image_other ?>" /></a></li>
-
+*/}
 	</ul>
-	</Router>
 </div>);
 }
 ;

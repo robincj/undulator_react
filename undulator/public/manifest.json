@@ -3,17 +3,17 @@
   "name": "Aorangi Undulator",
   "icons": [
     {
-      "src": "../src/images/aorangi_undulator_icon.jpg",
+      "src": "../public/images/logos/aorangi_undulator_icon.jpg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "../src/images/AU_banner.png",
+      "src": "../public/images/logos/AU_banner.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "../src/images/A100_banner.png",
+      "src": "../public/images/logos/A100_banner.png",
       "type": "image/png",
       "sizes": "512x512"
     }
