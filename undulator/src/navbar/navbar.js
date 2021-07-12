@@ -6,6 +6,7 @@ import {
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import {LinkContainer} from 'react-router-bootstrap';
 
 // Brand and toggle get grouped for better mobile display
 const MenuBarHeader = () => <>
@@ -24,28 +25,40 @@ const MenuBarHeader = () => <>
 
 // Collect the nav links, forms, and other content for toggling
 const MenuBarContent = (props) => {
-	const au = props.currentEvent === 'AU';
-	const a100 =  props.currentEvent === 'A100';
+	const au = props.currentEvent.name === 'AU';
+	const a100 =  props.currentEvent.name === 'A100';
 	return (
 
 	<Navbar.Collapse id="basic-navbar-nav">
 	<Nav className="mr-auto">
-		<Nav.Link href="/intro">Home</Nav.Link>
+
+		<Nav.Link href="/intro">HOME</Nav.Link>
+
 		<NavDropdown title="ENTRY" id="basic-nav-dropdown">
-		<NavDropdown.Item href="/prices">PRICES</NavDropdown.Item>
-		<NavDropdown.Item href="/enter">ENTER</NavDropdown.Item>
-		<NavDropdown.Item href="/merchandise">MERCHANDISE</NavDropdown.Item>
-		<NavDropdown.Divider />
-		<NavDropdown.Item href="/entries-list">ENTRIES SO FAR</NavDropdown.Item>
+			<NavDropdown.Item as={Link} to="/prices">PRICES</NavDropdown.Item>
+			<NavDropdown.Item as={Link} to="/enter"> ENTER</NavDropdown.Item>
+			<NavDropdown.Item as={Link} to="/merchandise">MERCHANDISE</NavDropdown.Item>
+			<NavDropdown.Item as={Link} to="/entries-list">ENTRIES SO FAR</NavDropdown.Item>
+			<NavDropdown.Divider />
 		</NavDropdown>
+
+		<NavDropdown title="EVENT INFORMATION" id="basic-nav-dropdown">
+			{au && <NavDropdown.Item as={Link} to="/directions">HOW TO GET THERE</NavDropdown.Item>}
+			{au && <NavDropdown.Item as={Link} to="/schedule_AU">RACE DAY SCHEDULE</NavDropdown.Item>}
+			{a100 && <NavDropdown.Item as={Link} to="/schedule_A100">A100 RACE SCHEDULE</NavDropdown.Item>}
+			<NavDropdown.Item as={Link} to="/course_notes">COURSE INFO &amp; MAPS</NavDropdown.Item>
+			{au && <NavDropdown.Item as={Link} to="/what_to_expect">WHAT TO EXPECT</NavDropdown.Item>}
+			<NavDropdown.Item as={Link} to="/equipment_list">EQUIPMENT LIST</NavDropdown.Item>
+			{a100 && <NavDropdown.Item as={Link} to="/spirit_award">A100 Spirit Award Trophy</NavDropdown.Item>}
+			<NavDropdown.Item as={Link} to="/prizes">PRIZES</NavDropdown.Item>
+		</NavDropdown>
+
 	</Nav>
 	</Navbar.Collapse>
 	)
 	;
 }
 	const OLD = (props) => {
-		const au = props.currentEvent === 'AU';
-		const a100 =  props.currentEvent === 'A100';
 		return (
 <div className="collapse navbar-collapse"
 	id="bs-example-navbar-collapse-1">
@@ -53,35 +66,6 @@ const MenuBarContent = (props) => {
 
 		<li><Link to='/intro'>HOME</Link></li>
 
-		<li className="dropdown"><button className="dropdown-toggle"
-			data-toggle="dropdown" aria-expanded="false">ENTER <span
-				className="caret"></span></button>
-
-			<ul className="dropdown-menu" role="menu">
-				<li><Link to='/prices'>PRICES</Link></li>
-				<li><Link to='/enter'>ENTER</Link></li>
-				<li><Link to='/merchandise'>MERCHANDISE</Link></li>
-				<li><Link to='/entries-list'>ENTRIES SO FAR</Link></li>
-			</ul></li>
-
-		<li className="dropdown">
-			<button className="dropdown-toggle"
-			data-toggle="dropdown" aria-expanded="false">EVENT INFORMATION
-				<span className="caret"></span>
-		</button>
-
-			<ul className="dropdown-menu" role="menu">
-
-				{au && <li><Link to='/directions'>HOW TO GET THERE</Link></li>}
-				{au && <li><Link to='/schedule_AU'>RACE DAY SCHEDULE</Link></li>}
-				{a100 && <li><Link to='/schedule_A100'>A100 RACE SCHEDULE</Link></li>}
-				<li><Link to='/course_notes'>COURSE INFO &amp; MAPS</Link></li>
-				{au && <li><Link to='/what_to_expect'>WHAT TO EXPECT</Link></li>}						
-				<li><Link to='/equipment_list'>EQUIPMENT LIST</Link></li>
-				{a100 && <li><Link to='/spirit_award'>A100 Spirit Award Trophy</Link></li>}
-				<li><Link to='/prizes'>PRIZES</Link></li>
-
-			</ul></li>
 {/*
 		<li className="dropdown"><button className="dropdown-toggle"
 			data-toggle="dropdown" aria-expanded="false">RESULTS
@@ -159,7 +143,7 @@ const MenuBarContent = (props) => {
 export const MenuBar = (props) =>
 <Navbar bg="dark" expand="lg">
 	<MenuBarHeader/>
-	<MenuBarContent/>
+	<MenuBarContent currentEvent={props.currentEvent} switchEvent={props.switchEvent} />
 </Navbar>;
 
 export default MenuBar;
