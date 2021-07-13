@@ -11,46 +11,48 @@ import LinksColumn from './links-column/links-column';
 import BannerImage from './banner-image/banner-image.js';
 
 const Front = () => {
-	const events = [{name:'AU'}, {name:'A100'}];
-	const [ currentEvent, setCurrentEvent ] = useState(events[0]);
-	const switchEvent = (currentEventFrom)=>{
+	const events = [{ name: 'AU' }, { name: 'A100' }];
+	const [currentEvent, setCurrentEvent] = useState(events[0]);
+	const otherEvent = events.find(e => e.name !== currentEvent.name);
+
+	const switchEvent = (currentEventFrom) => {
 		// set current event to the one which is not currently set
-		setCurrentEvent( events.find(e=>e.name !== currentEventFrom));
+		setCurrentEvent(events.find(e => e.name !== currentEventFrom));
 	}
 
 	return (
-	<Router>
-		<div id='wrap'>
-			<header>
+		<Router>
+			<div id='wrap'>
+				<header>
+					<div className="container">
+						<div className="row">
+							<div className="col-md-12">
+								<BannerImage currentEvent={currentEvent} />
+							</div>
+						</div>
+					</div>
+				</header>
+
+				<Navbar otherEvent={otherEvent} currentEvent={currentEvent} switchEvent={switchEvent} />
+
 				<div className="container">
 					<div className="row">
-						<div className="col-md-12">
-							<BannerImage currentEvent={currentEvent}/>
+						<div className="col-xs-12 col-md-2 text-center">
+							<LinksColumn currentEvent={currentEvent} switchEvent={switchEvent} />
+						</div>
+
+						<div id="main" className="maincontent col-xs-12 col-md-9">
+							<RouterSwitch />
+						</div>
+
+						<div className="col-xs-12 col-md-1 share-icon-col text-center">
+							<ShareSection />
 						</div>
 					</div>
 				</div>
-			</header>
 
-			<Navbar currentEvent switchEvent/>
-
-			<div className="container">
-				<div className="row">
-					<div className="col-xs-12 col-md-2 text-center">
-						<LinksColumn currentEvent={currentEvent} switchEvent={switchEvent}/>				
-					</div>
-
-					<div id="main" className="maincontent col-xs-12 col-md-9">
-						<RouterSwitch/>
-					</div>
-
-					<div className="col-xs-12 col-md-1 share-icon-col text-center">
-						<ShareSection/>				
-					</div>
-				</div>
 			</div>
-		
-		</div>
-		<Footer/>
+			<Footer />
 		</Router>);
 }
 	;

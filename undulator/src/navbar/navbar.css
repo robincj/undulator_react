@@ -1,4 +1,4 @@
-
+/* 
 @media ( min-width : 768px) {
 	.navbar .navbar-nav {
 		display: inline-block;
@@ -8,13 +8,13 @@
 	.navbar .navbar-collapse {
 		text-align: center;
 	}
-}
+} */
 
-.navbar li {
+/* .navbar .dropdown-item {
 	text-align: center;
-}
+} */
 
-nav a.other_event_link {
+nav .other_event_link {
 	padding: 5px;
 }
 
