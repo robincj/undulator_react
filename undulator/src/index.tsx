@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import {
 	BrowserRouter as Router
@@ -8,16 +8,22 @@ import Footer from './footer';
 import Navbar from './navbar/navbar';
 import ShareSection from './share-section/share-section';
 import LinksColumn from './links-column/links-column';
-import BannerImage from './banner-image/banner-image.js';
+import BannerImage from './banner-image/banner-image';
+
+export type EventType = { name: string };
 
 const Front = () => {
-	const events = [{ name: 'AU' }, { name: 'A100' }];
+	const events: EventType[] = [{ name: 'AU' }, { name: 'A100' }];
 	const [currentEvent, setCurrentEvent] = useState(events[0]);
 	const otherEvent = events.find(e => e.name !== currentEvent.name);
 
-	const switchEvent = (currentEventFrom) => {
+	const switchEvent = (currentEventFrom: string) => {
 		// set current event to the one which is not currently set
-		setCurrentEvent(events.find(e => e.name !== currentEventFrom));
+		const newEvent = events.find(e => e.name !== currentEventFrom);
+		if (newEvent) {
+			setCurrentEvent(newEvent);
+		}
+		else console.error(`Cannot find event ${newEvent}`)
 	}
 
 	return (

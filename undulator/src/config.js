@@ -19,7 +19,7 @@ const configuration = {
     PRICE_AU_EARLY: 50,
     PRICE_AU_LATE: 80,
     ENTRIES_OPEN_DATE: eventYear + '-01-24',
-    MERCHANDISE: { "THIR-Undulator-headband": { "display_name": "THIR Undulator headband", "price": 30, "sizes": null, "colours": null, "description": "<a href=\"http:\/\/www.thir.co.nz\/thirbands.php\">THIR multi-sport headband<\/a> with the Undulator logo", "image": "images\/logos\/Undulator THIR.jpg" }, "T-Shirt": { "display_name": "T-Shirt", "price": 40, "sizes": ["S", "M", "L"], "colours": ["copper"], "description": "Undulator T-shirt", "image": "images\/logos\/undulator_tshirt_copper.png" } }
+    MERCHANDISE: { "THIR-Undulator-headband": { "display_name": "THIR Undulator headband", "price": 30, "sizes": null, "colours": null, "description": "<a href=\"http://www.thir.co.nz/thirbands.php\">THIR multi-sport headband</a> with the Undulator logo", "image": "images/logos/Undulator THIR.jpg" }, "T-Shirt": { "display_name": "T-Shirt", "price": 40, "sizes": ["S", "M", "L"], "colours": ["copper"], "description": "Undulator T-shirt", "image": "images/logos/undulator_tshirt_copper.png" } }
 };
 
 // close online entries 5pm before day 1
