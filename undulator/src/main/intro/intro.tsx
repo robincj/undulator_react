@@ -1,47 +1,58 @@
-// import config from '../../config';
+import {
+    Link
+} from "react-router-dom";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+import config from '../../config';
 
-// const fileRowCount = (filename, ignoreblanks = false) => {
-//     return 10;
-// }
+const fileRowCount = () => {
+    return 10;
+}
 
-export const Intro = () => {
-    return (<h2>Introduction</h2>);
-    /*
+export const Intro = (props) => {
+
+    if (props.currentEvent.name === 'AU') {
+        const entrycount = fileRowCount();
+        const entriesLeft = config.MAX_ENTRIES_AU - entrycount;
+
         return (
-            
-        if (!file_exists(ENTRIES_DIR))
-            mkdir(ENTRIES_DIR);
-    
-        $entrylist_file = ENTRIES_DIR.ENTRIES_FILE_AU;
-        if (!file_exists($entrylist_file))
-            file_put_contents($entrylist_file, '');
-    
-        $entrycount = file_rowcount($entrylist_file, TRUE);
-        $entriesLeft = MAX_ENTRIES_AU - $entrycount;
-        $notFull = <<<EOH
-                <h4>
-                    <a href="#" onClick="loadmaincontent('enter.php')"
-                        title="Click here to enter">Entries are open now!</a>
-                </h4>
+            <div>
+                {
+                    entriesLeft <= 0 ?
+                        (<div className="AU">
+                            <h4 style={{ color: "red" }}>The event has reached its entry limit!</h4>
+                            <h4><OverlayTrigger
+                                key={"left"}
+                                placement={"left"}
+                                overlay={
+                                    <Tooltip id={'waitlist_tooltip'}>Click here to put yourself on the wait-list
+                                    </Tooltip>
+                                }
+                            >
+                                <Link to="/enter">Put yourself on
+                                    the wait-list in case entries become available.</Link>
+                            </OverlayTrigger>
+                            </h4>
+                        </div >)
+                        :
+                        (<div className="AU"><h4><OverlayTrigger
+                            key={"left"}
+                            placement={"left"}
+                            overlay={
+                                <Tooltip id={'enter_tooltip'}>Click here to enter
+                                </Tooltip>
+                            }
+                        >
+                            <Link to="/enter">Entries are open now!</Link>
+                        </OverlayTrigger>
+                        </h4>{entriesLeft < config.MAX_ENTRIES_AU * 0.8 ?
+                            <div className='AU'><h4>Only $entriesLeft entries Left!</h4></div> : ''}
+                        </div >)
+                }
             </div >
-        EOH;
-    $full = <<<EOH
-                <h4 style="color: red;">The event has reached its entry limit!</h4>
-                <h4>
-                    <a href="#" onClick="loadmaincontent('enter.php')"
-                        title="Click here to put yourself on the wait-list">Put yourself on
-                        the wait-list in case entries become available.</a>
-                </h4>
-            </div >
-        EOH;
-    
-    $auMsg = '<div class="AU">';
-    if ($entriesLeft <= 0)
-        $auMsg.= $full;
-    else {
-        $auMsg.= $notFull;
-        $auMsg.= $entriesLeft < MAX_ENTRIES_AU * 0.8 ? "<div class='AU'><h4>Only $entriesLeft entries Left!</h4></div>" : '';
+        );
     }
+    /*
     
     $entrylist_file = ENTRIES_DIR.ENTRIES_FILE_A100;
     if (!file_exists($entrylist_file))

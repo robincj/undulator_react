@@ -15,7 +15,7 @@ export type EventType = { name: string };
 const Front = () => {
 	const events: EventType[] = [{ name: 'AU' }, { name: 'A100' }];
 	const [currentEvent, setCurrentEvent] = useState(events[0]);
-	const otherEvent = events.find(e => e.name !== currentEvent.name);
+	const otherEvent = events.find(e => e.name !== currentEvent.name) || events[1];
 
 	const switchEvent = (currentEventFrom: string) => {
 		// set current event to the one which is not currently set

@@ -1,8 +1,7 @@
-import React from 'react';
 import {
 	Link
 } from "react-router-dom";
-// import './navbar.css';
+import { EventType } from '../index';
 import Image from 'react-bootstrap/Image';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -10,6 +9,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import './navbar.css';
+
+type Props = {
+	currentEvent: EventType;
+	otherEvent: EventType;
+	switchEvent: (currentEventFrom: string) => void;
+};
 
 // Brand and toggle get grouped for better mobile display
 const MenuBarHeader = () => <>
@@ -27,7 +32,7 @@ const MenuBarHeader = () => <>
 	;
 
 // Collect the nav links, forms, and other content for toggling
-const MenuBarContent = (props) => {
+const MenuBarContent = (props: Props) => {
 	const au = props.currentEvent.name === 'AU';
 	const a100 = props.currentEvent.name === 'A100';
 
@@ -89,12 +94,12 @@ const MenuBarContent = (props) => {
 						key={"left"}
 						placement={"left"}
 						overlay={
-							<Tooltip>
+							<Tooltip id={'other_event_tooltip'}>
 								{a100 && 'For something a little lighter, try the 1-day Aorangi Undulator'}
 								{au && 'Sounds too easy? Try the Aorangi Undulator 100'}
 							</Tooltip>
 						}
-					><Image src={`images/logos/${props.otherEvent.name}_banner.png`} onClick={props.switchEvent()} />
+					><Image src={`images/logos/${props.otherEvent.name}_banner.png`} onClick={() => props.switchEvent(props.currentEvent.name)} />
 					</OverlayTrigger>
 				</Nav.Link>
 			</Nav>
@@ -102,7 +107,7 @@ const MenuBarContent = (props) => {
 	);
 }
 
-export const MenuBar = (props) =>
+export const MenuBar = (props: Props) =>
 	<Navbar bg="light" expand="lg">
 		<MenuBarHeader />
 		<MenuBarContent otherEvent={props.otherEvent} currentEvent={props.currentEvent} switchEvent={props.switchEvent} />

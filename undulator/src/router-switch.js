@@ -12,6 +12,8 @@ import EntriesList from './main/entries-list/entries-list';
 
 const PageUnavailable = () => <h1>Page not yet constructed</h1>
 
+// Need to pass props from links to routes
+
 export const RouterSwitch = () =>
   <Switch>
     <Route path="/" exact><Intro /></Route>
