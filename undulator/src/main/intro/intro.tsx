@@ -1,8 +1,7 @@
 import {
     Link
 } from "react-router-dom";
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
+import ToolTip from '../../components/tooltip/tooltip';
 import config from '../../config';
 
 const fileRowCount = () => {
@@ -10,48 +9,42 @@ const fileRowCount = () => {
 }
 
 export const Intro = (props) => {
+    const evName = props.currentEvent.name;
+    let maxEntries = config.MAX_ENTRIES_AU;
 
-    if (props.currentEvent.name === 'AU') {
-        const entrycount = fileRowCount();
-        const entriesLeft = config.MAX_ENTRIES_AU - entrycount;
-
-        return (
-            <div>
-                {
-                    entriesLeft <= 0 ?
-                        (<div className="AU">
-                            <h4 style={{ color: "red" }}>The event has reached its entry limit!</h4>
-                            <h4><OverlayTrigger
-                                key={"left"}
-                                placement={"left"}
-                                overlay={
-                                    <Tooltip id={'waitlist_tooltip'}>Click here to put yourself on the wait-list
-                                    </Tooltip>
-                                }
-                            >
-                                <Link to="/enter">Put yourself on
-                                    the wait-list in case entries become available.</Link>
-                            </OverlayTrigger>
-                            </h4>
-                        </div >)
-                        :
-                        (<div className="AU"><h4><OverlayTrigger
-                            key={"left"}
-                            placement={"left"}
-                            overlay={
-                                <Tooltip id={'enter_tooltip'}>Click here to enter
-                                </Tooltip>
-                            }
-                        >
-                            <Link to="/enter">Entries are open now!</Link>
-                        </OverlayTrigger>
-                        </h4>{entriesLeft < config.MAX_ENTRIES_AU * 0.8 ?
-                            <div className='AU'><h4>Only $entriesLeft entries Left!</h4></div> : ''}
-                        </div >)
-                }
-            </div >
-        );
+    if (evName === 'A100') {
+        maxEntries = config.MAX_ENTRIES_A100;
     }
+
+    const entrycount = fileRowCount();
+    const entriesLeft = maxEntries - entrycount;
+
+    return (
+        <div>
+            {
+                entriesLeft <= 0 ?
+                    (<div>
+                        <h4 style={{ color: "red" }}>The event has reached its entry limit!</h4>
+                        <h4>
+                            <ToolTip
+                                placement={"left"} id={'waitlist_tooltip'} tip={'Click here to put yourself on the wait-list'}>
+                                <Link to="/enter">Click here to put yourself on the wait-list</Link>
+                            </ToolTip>
+                        </h4>
+                    </div >)
+                    :
+                    (<div><h4>
+                        <ToolTip
+                            placement={"left"} id={'enter_tooltip'} tip={'Click here to enter'}>
+                            <Link to="/enter">Entries are open now!</Link>
+                        </ToolTip>
+                    </h4>{entriesLeft < maxEntries * 0.8 ?
+                        <div><h4>Only {entriesLeft} entries Left!</h4></div> : ''}
+                    </div >)
+            }
+        </div >
+    );
+
     /*
     
     $entrylist_file = ENTRIES_DIR.ENTRIES_FILE_A100;

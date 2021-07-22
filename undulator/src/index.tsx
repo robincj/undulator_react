@@ -48,7 +48,7 @@ const Front = () => {
 						</div>
 
 						<div id="main" className="maincontent col-xs-12 col-md-9">
-							<RouterSwitch />
+							<RouterSwitch otherEvent={otherEvent} currentEvent={currentEvent} switchEvent={switchEvent} />
 						</div>
 
 						<div className="col-xs-12 col-md-1 share-icon-col text-center">
