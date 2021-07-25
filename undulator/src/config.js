@@ -23,8 +23,8 @@ const configuration = {
 };
 
 // close online entries 5pm before day 1
-configuration.ONLINE_ENTRIES_CLOSED = (new Date(configuration.ENTRIES_OPEN_DATE) < now && new Date(configuration.DATE_A100_DAY1).getTime() - (1000 * 60 * 60 * 7) > now.getTime());
-configuration.ENTRIES_OPEN = (new Date(configuration.ENTRIES_OPEN_DATE) < now && new Date(configuration.DATE_AU) > now);
+configuration.ONLINE_ENTRIES_CLOSED = (new Date(configuration.ENTRIES_OPEN_DATE).getTime() < now.getTime() && new Date(configuration.DATE_A100_DAY1).getTime() - (1000 * 60 * 60 * 7) < now.getTime());
+configuration.ENTRIES_OPEN = (new Date(configuration.ENTRIES_OPEN_DATE).getTime() < now.getTime() && new Date(configuration.DATE_AU).getTime() > now.getTime());
 
 export const config = configuration;
 export default config;

@@ -18,6 +18,8 @@ export const RouterSwitch = (routerSwitchProps) =>
   <Switch>
     <Route path="/" exact render={(props) => (<Intro {...props} {...routerSwitchProps} />)} />
     <Route path="/intro" exact render={(props) => (<Intro {...props} {...routerSwitchProps} />)} />
+    <Route path="/au" exact render={(props) => (<Intro {...props} {...routerSwitchProps} currentEventName='AU' />)} />
+    <Route path="/a100" exact render={(props) => (<Intro {...props} {...routerSwitchProps} currentEventName='A100' />)} />
     <Route path="/prices" exact render={(props) => (<Prices {...props} {...routerSwitchProps} />)} />
     <Route path="/enter" exact render={(props) => (<Enter {...props} {...routerSwitchProps} />)} />
     <Route path="/merchandise" exact render={(props) => (<Merchandise {...props} {...routerSwitchProps} />)} />

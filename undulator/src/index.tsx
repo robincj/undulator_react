@@ -10,16 +10,23 @@ import ShareSection from './share-section/share-section';
 import LinksColumn from './links-column/links-column';
 import BannerImage from './banner-image/banner-image';
 
-export type EventType = { name: string };
+export interface EventType { name: string }
+interface Props {
+	currentEventName?: string;
+}
 
-const Front = () => {
+const Front = (props: Props) => {
 	const events: EventType[] = [{ name: 'AU' }, { name: 'A100' }];
-	const [currentEvent, setCurrentEvent] = useState(events[0]);
+	let eventIndex = 0;
+	if (props.currentEventName) {
+		events.find((e, i) => eventIndex = e.name === props.currentEventName ? i : 0)
+	}
+	const [currentEvent, setCurrentEvent] = useState(events[eventIndex]);
 	const otherEvent = events.find(e => e.name !== currentEvent.name) || events[1];
 
-	const switchEvent = (currentEventFrom: string) => {
+	const switchEvent = () => {
 		// set current event to the one which is not currently set
-		const newEvent = events.find(e => e.name !== currentEventFrom);
+		const newEvent = events.find(e => e.name !== currentEvent.name);
 		if (newEvent) {
 			setCurrentEvent(newEvent);
 		}

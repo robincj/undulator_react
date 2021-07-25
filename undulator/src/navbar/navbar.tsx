@@ -13,7 +13,7 @@ import './navbar.css';
 type Props = {
 	currentEvent: EventType;
 	otherEvent: EventType;
-	switchEvent: (currentEventFrom: string) => void;
+	switchEvent: () => void;
 };
 
 // Brand and toggle get grouped for better mobile display
@@ -99,7 +99,7 @@ const MenuBarContent = (props: Props) => {
 								{au && 'Sounds too easy? Try the Aorangi Undulator 100'}
 							</Tooltip>
 						}
-					><Image src={`images/logos/${props.otherEvent.name}_banner.png`} onClick={() => props.switchEvent(props.currentEvent.name)} />
+					><Image src={`images/logos/${props.otherEvent.name}_banner.png`} onClick={props.switchEvent} />
 					</OverlayTrigger>
 				</Nav.Link>
 			</Nav>

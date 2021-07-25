@@ -2,72 +2,60 @@ import {
     Link
 } from "react-router-dom";
 import ToolTip from '../../components/tooltip/tooltip';
-import config from '../../config';
+import cfg from '../../config';
+import AUIntro from './au_intro';
 
-const fileRowCount = () => {
+const fileRowCount = (filePath) => {
+    // @TODO fetch line count of filePath
     return 10;
 }
 
 export const Intro = (props) => {
     const evName = props.currentEvent.name;
-    let maxEntries = config.MAX_ENTRIES_AU;
+    let maxEntries = cfg.MAX_ENTRIES_AU;
+    let fileName = cfg.ENTRIES_FILE_AU;
 
     if (evName === 'A100') {
-        maxEntries = config.MAX_ENTRIES_A100;
+        maxEntries = cfg.MAX_ENTRIES_A100;
+        fileName = cfg.ENTRIES_FILE_A100;
     }
-
-    const entrycount = fileRowCount();
+    const filePath = `${cfg.ENTRIES_DIR}${fileName}`;
+    const entrycount = fileRowCount(filePath);
     const entriesLeft = maxEntries - entrycount;
 
-    return (
-        <div>
-            {
-                entriesLeft <= 0 ?
-                    (<div>
-                        <h4 style={{ color: "red" }}>The event has reached its entry limit!</h4>
-                        <h4>
-                            <ToolTip
-                                placement={"left"} id={'waitlist_tooltip'} tip={'Click here to put yourself on the wait-list'}>
-                                <Link to="/enter">Click here to put yourself on the wait-list</Link>
-                            </ToolTip>
-                        </h4>
-                    </div >)
-                    :
-                    (<div><h4>
-                        <ToolTip
-                            placement={"left"} id={'enter_tooltip'} tip={'Click here to enter'}>
-                            <Link to="/enter">Entries are open now!</Link>
-                        </ToolTip>
-                    </h4>{entriesLeft < maxEntries * 0.8 ?
-                        <div><h4>Only {entriesLeft} entries Left!</h4></div> : ''}
-                    </div >)
-            }
-        </div >
-    );
+    let entryMessage: JSX.Element;
+
+    if (!cfg.ENTRIES_OPEN) {
+        entryMessage = <div><h4>Entries are not yet open for the next event.</h4></div>;
+    } else if (cfg.ONLINE_ENTRIES_CLOSED) {
+        entryMessage = <div><h4>Online entries are now closed but entries for the 1-day event can be made on the event day at a cost of ${cfg.PRICE_AU_LATE}.</h4></div>;
+    } else if (entriesLeft <= 0) {
+        entryMessage = <div>
+            <h4 style={{ color: "red" }}>The event has reached its entry limit!</h4>
+            <h4>
+                <ToolTip
+                    placement={"left"} id={'waitlist_tooltip'} tip={'Click here to put yourself on the wait-list'}>
+                    <Link to="/enter">Click here to put yourself on the wait-list</Link>
+                </ToolTip>
+            </h4>
+        </div >;
+    } else {
+        entryMessage = <div><h4>
+            <ToolTip
+                placement={"left"} id={'enter_tooltip'} tip={'Click here to enter'}>
+                <Link to="/enter">Entries are open now!</Link>
+            </ToolTip>
+        </h4>{entriesLeft < maxEntries * 0.8 ?
+            <div><h4>Only {entriesLeft} entries Left!</h4></div> : ''}
+        </div >;
+    }
+
+    return <div>
+        {entryMessage}
+        <AUIntro switchEvent={props.switchEvent} />
+    </div>;
 
     /*
-    
-    $entrylist_file = ENTRIES_DIR.ENTRIES_FILE_A100;
-    if (!file_exists($entrylist_file))
-        file_put_contents($entrylist_file, '');
-    $entrycount = file_rowcount($entrylist_file, TRUE);
-    $entriesLeft = MAX_ENTRIES_A100 - $entrycount;
-    $a100Msg = '<div class="A100">';
-    
-    if (!ENTRIES_OPEN) {
-        $a100Msg = '';
-        $auMsg = "<div><h4>Entries are not yet open for the next event.</h4></div>";
-    } elseif(ONLINE_ENTRIES_CLOSED) {
-        $auMsg = "<div><h4>Online entries are now closed but entries for the 1-day event can be made on the event day at a cost of $".PRICE_AU_LATE. ".</h4></div>";
-    } elseif($entriesLeft <= 0)
-    $a100Msg.= $full;
-        else {
-        $a100Msg.= $notFull;
-        $auMsg.= $entriesLeft < MAX_ENTRIES_A100 * 0.6 ? "<div class='A100'><h4>Only $entriesLeft entries Left!</h4></div>" : '';
-    }
-    // OVERRIDE ENTRY MESSAGE FOR RESULTS
-    // $a100Msg = '';
-    // $auMsg = '<div><a href="https://drive.google.com/file/d/0B0kHo5rD1yVIUmpKa1FfSTJpU01tcno4YlNqWlNKem52QU5J/view?usp=sharing">Results for 2016 are here.</a></div>';
     
     echo "<!-- max: ".MAX_ENTRIES_A100. " count:  $entrycount Left: $entriesLeft -->";
         ?>
