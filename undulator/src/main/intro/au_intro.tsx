@@ -7,6 +7,7 @@ import cfg from '../../config';
 interface Props {
     switchEvent: () => void;
 }
+
 export const AUIntro = (props: Props) =>
     <div className="text-center">
         <h3><Date format='dddd DS MMMM, YYYY'>{cfg.DATE_AU}</Date></h3>
@@ -22,7 +23,7 @@ export const AUIntro = (props: Props) =>
         </p>
         <p>
             Those inclined towards longer distance events may want to look at the
-            <button onClick={props.switchEvent}>Aorangi Undulator 100</button>, a 100km 3 day race
+            {' '}<Link to='/a100' >Aorangi Undulator 100</Link>, a 100km 3 day race
             starting in Eastbourne and finishing at Waikuku Lodge in the Aorangi
             forest park.
         </p>

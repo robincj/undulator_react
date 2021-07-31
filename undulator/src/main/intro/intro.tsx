@@ -4,6 +4,7 @@ import {
 import ToolTip from '../../components/tooltip/tooltip';
 import cfg from '../../config';
 import AUIntro from './au_intro';
+import A100Intro from './a100_intro';
 
 const fileRowCount = (filePath) => {
     // @TODO fetch line count of filePath
@@ -15,9 +16,12 @@ export const Intro = (props) => {
     let maxEntries = cfg.MAX_ENTRIES_AU;
     let fileName = cfg.ENTRIES_FILE_AU;
 
+    let introInfo = <AUIntro switchEvent={props.switchEvent} />
+
     if (evName === 'A100') {
         maxEntries = cfg.MAX_ENTRIES_A100;
         fileName = cfg.ENTRIES_FILE_A100;
+        introInfo = <A100Intro switchEvent={props.switchEvent} />
     }
     const filePath = `${cfg.ENTRIES_DIR}${fileName}`;
     const entrycount = fileRowCount(filePath);
@@ -52,7 +56,7 @@ export const Intro = (props) => {
 
     return <div>
         {entryMessage}
-        <AUIntro switchEvent={props.switchEvent} />
+        {introInfo}
     </div>;
 
     /*

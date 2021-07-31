@@ -16,7 +16,6 @@ export const DateFormat = (props) => {
     }
 
     const formatProps = { ...props, format };
-    console.log(formatProps);
 
     return <DayJS {...formatProps}>{props.children}</DayJS>
 };
