@@ -6,18 +6,23 @@ import {
 	Route, Redirect
 } from "react-router-dom";
 import Main from './main-router';
-import Footer from './footer';
+import Footer from './footer/footer';
 import Navbar from './navbar/navbar';
 import ShareSection from './share-section/share-section';
 import LinksColumn from './links-column/links-column';
 import BannerImage from './banner-image/banner-image';
 
-export interface EventType { name: string, display_name: string }
+export interface EventType { name: "AU" | 'A100', displayName: string, longName: string }
 
 export interface CommonProps {
 	currentEvent: EventType;
 	otherEvent: EventType;
 };
+
+export const events: EventType[] = [
+	{ name: 'AU', displayName: 'Aorangi Undulator', longName: "The 1-day Aorangi Undulator" },
+	{ name: 'A100', displayName: 'Aorangi Undulator 100', longName: "The 3-day Aorangi Undulator 100" }
+];
 
 export const Front = () => {
 	return (
@@ -36,17 +41,15 @@ interface EventPageProps extends CommonProps {
 	currentEventName?: string;
 }
 
-export const events: EventType[] = [
-	{ name: 'AU', display_name: 'Aorangi Undulator' },
-	{ name: 'A100', display_name: 'Aorangi Undulator 100' }
-];
+export const getEventByName = (name: string): EventType => events.find(e => e.name.toUpperCase() === name.toUpperCase()) || events[0];
+export const getOtherEventByName = (name: string): EventType => events.find(e => e.name.toUpperCase() !== name.toUpperCase()) || events[1];
 
 const EventPage = (props: EventPageProps) => {
 	const [currentEvent, setCurrentEvent] = useState(events[0]);
 
 	const switchEvent = () => {
 		// set current event to the one which is not currently set
-		const newEvent = events.find(e => e.name !== currentEvent.name);
+		const newEvent = getOtherEventByName(currentEvent.name);
 		if (newEvent) {
 			setCurrentEvent(newEvent);
 		}
@@ -56,18 +59,11 @@ const EventPage = (props: EventPageProps) => {
 	if (currentEvent.name !== props.currentEventName) {
 		switchEvent();
 	}
-	const otherEvent = events.find(e => e.name !== currentEvent.name) || events[1];
+	const otherEvent = getOtherEventByName(currentEvent.name);
 
-	console.log("EventPage", currentEvent);
 	return <>
 		<header>
-			<div className="container">
-				<div className="row">
-					<div className="col-md-12">
-						<BannerImage currentEvent={currentEvent} />
-					</div>
-				</div>
-			</div>
+			<BannerImage currentEvent={currentEvent} />
 		</header>
 
 		<Navbar otherEvent={otherEvent} currentEvent={currentEvent} />

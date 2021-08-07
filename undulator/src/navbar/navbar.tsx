@@ -7,7 +7,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import ToolTip from '../components/tooltip/tooltip';
-import './navbar.css';
+// import './navbar.scss';
+import { ReactElement } from "react";
 
 // Brand and toggle get grouped for better mobile display
 const MenuBarHeader = () => <>
@@ -37,9 +38,12 @@ const DropLink = (props: DropLinkProps) => {
 	return <NavDropdown.Item key={`navdropdown.item${keyNum++}`} as={Link} to={pathUrl}>{props.text}</NavDropdown.Item>;
 }
 
-const DropLinks = (props: { links: [string, string][] }) => {
-	return <>{props.links.map(p => <DropLink text={p[0]} url={p[1]} />)}</>
-}
+let dropKey = 1;
+const DropLinks = (props: { links: ([string, string] | ReactElement | null | false)[] }) => {
+	return <>{props.links.filter(p => p).map(p => {
+		return p instanceof Array ? <DropLink text={p[0]} url={p[1]} /> : p;
+	})}</>
+};
 
 // Collect the nav links, forms, and other content for toggling
 const MenuBarContent = (props: CommonProps) => {
@@ -53,19 +57,25 @@ const MenuBarContent = (props: CommonProps) => {
 				<Nav.Link as={Link} to={`${path}/intro`}> HOME</Nav.Link>
 
 				<NavDropdown title="ENTRY" id="basic-nav-dropdown">
-					<DropLinks links={[['PRICES', 'prices'], ['ENTER', 'enter'], ['MERCHANDISE', 'merchandise'], ['ENTRIES SO FAR', 'entries-list']]} />
-					<NavDropdown.Divider />
+					<DropLinks links={[
+						['PRICES', 'prices'],
+						['ENTER', 'enter'],
+						['MERCHANDISE', 'merchandise'],
+						['ENTRIES SO FAR', 'entries-list']
+					]} />
 				</NavDropdown>
 
 				<NavDropdown title="EVENT INFORMATION" id="basic-nav-dropdown">
-					{au && <NavDropdown.Item as={Link} to={`${path}/directions`}> HOW TO GET THERE</NavDropdown.Item>}
-					{au && <NavDropdown.Item as={Link} to={`${path}/schedule_AU`}> RACE DAY SCHEDULE</NavDropdown.Item>}
-					{a100 && <NavDropdown.Item as={Link} to={`${path}/schedule_A100`}> A100 RACE SCHEDULE</NavDropdown.Item>}
-					<NavDropdown.Item as={Link} to={`${path}/course_notes`}> COURSE INFO & amp; MAPS</NavDropdown.Item >
-					{au && <NavDropdown.Item as={Link} to={`${path}/what_to_expect`}> WHAT TO EXPECT</ NavDropdown.Item>}
-					<NavDropdown.Item as={Link} to={`${path}/equipment_list`}> EQUIPMENT LIST</NavDropdown.Item>
-					{a100 && <NavDropdown.Item as={Link} to={`${path}/spirit_award`}> A100 Spirit Award Trophy</NavDropdown.Item>}
-					<NavDropdown.Item as={Link} to={`${path}/prizes`}>PRIZES</NavDropdown.Item>
+					<DropLinks links={[
+						au && ['HOW TO GET THERE', `${path}/directions`],
+						au && ['RACE DAY SCHEDULE', `${path}/schedule_AU`],
+						a100 && ['A100 RACE SCHEDULE', `${path}/schedule_A100`],
+						['COURSE INFO & MAPS', `${path}/course_notes`],
+						au && ['WHAT TO EXPECT', `${path}/what_to_expect`],
+						['EQUIPMENT LIST', `${path}/equipment_list`],
+						a100 && ['A100 Spirit Award Trophy', `${path}/spirit_award`],
+						['PRIZES', `${path}/prizes`],
+					]} />
 				</NavDropdown>
 
 				<NavDropdown title="RESULTS" id="basic-nav-dropdown">
@@ -91,9 +101,7 @@ const MenuBarContent = (props: CommonProps) => {
 						['VIDEOS', 'youtube'],
 						['ARTICLES', 'articles'],
 						['PLACES TO STAY', 'accommodation'],
-					]} />
-					<NavDropdown.Divider />
-					<DropLinks links={[
+						<NavDropdown.Divider key={dropKey++} />,
 						['OTHER RACES', 'other_races'],
 						['AORANGI TRUST', 'aorangi_trust'],
 					]} />

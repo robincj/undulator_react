@@ -1,0 +1,20 @@
+footer {
+	height: 4em;
+	font-size: 90%;
+	background-color: #662d91;
+	border-radius: 10px;
+	color: #aaa;
+    margin: 2px;
+    padding: 6px;
+
+	img {
+        max-height: 3em;
+        // margin-top: 6px;
+        margin-left: 2em;
+    }
+
+    .contact {
+        float: right;
+        margin-right: 2em;
+    }
+}

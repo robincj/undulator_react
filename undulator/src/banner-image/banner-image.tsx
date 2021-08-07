@@ -1,13 +1,16 @@
-import Image from 'react-bootstrap/Image';
 import { EventType } from '../index';
+
+import './banner-image.scss';
 
 type Props = {
 	currentEvent: EventType;
 }
 
+export const bannerImagePath = (event: EventType) => `images/logos/${event.name}_banner.png`;
+
 export const BannerImage = (props: Props) =>
-	<Image className={`${props.currentEvent.name} banner_image img-responsive`}
-		alt={props.currentEvent.name}
-		src={`images/logos/${props.currentEvent.name}_banner.png`} />;
+	<div className="banner_image_container">
+		<img alt={props.currentEvent.name} src={bannerImagePath(props.currentEvent)} />
+	</div>;
 
 export default BannerImage;
