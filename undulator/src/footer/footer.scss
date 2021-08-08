@@ -6,6 +6,15 @@ footer {
 	color: #aaa;
     margin: 2px;
     padding: 6px;
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    
 
 	img {
         max-height: 3em;

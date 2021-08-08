@@ -6,6 +6,8 @@ import cfg from '../../config';
 import AUIntro from './au_intro';
 import A100Intro from './a100_intro';
 
+import './intro.scss';
+
 const fileRowCount = (filePath) => {
     // @TODO fetch line count of filePath
     return 10;
@@ -55,7 +57,7 @@ export const Intro = (props) => {
     }
 
     return <div>
-        {entryMessage}
+        <div className='entry-message'>{entryMessage}</div>
         {introInfo}
     </div>;
 

@@ -1,7 +1,11 @@
 nav { 
+	.navbar-nav {
+		margin: auto;
+	}
 	.other_event_link {
 		padding: 5px;
 		img {	
+			max-height: 3em;
 			width: 150px;
 		}
 	}

@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import {
 	Link, useRouteMatch
 } from "react-router-dom";
@@ -7,23 +8,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import ToolTip from '../components/tooltip/tooltip';
-// import './navbar.scss';
-import { ReactElement } from "react";
 
-// Brand and toggle get grouped for better mobile display
-const MenuBarHeader = () => <>
-	<Navbar.Brand href="#home">
-		<img
-			src="/images/logos/aorangi_undulator_icon.jpg"
-			width="30"
-			height="30"
-			className="d-inline-block align-top"
-			alt="Aorangi Undulator logo"
-		/>
-	</Navbar.Brand>
-	<Navbar.Toggle aria-controls="basic-navbar-nav" />
-</>
-	;
+import './navbar.scss';
 
 interface DropLinkProps { text: string, url: string };
 let keyNum = 1;
@@ -52,7 +38,7 @@ const MenuBarContent = (props: CommonProps) => {
 	const { path } = useRouteMatch();
 	return (
 		<Navbar.Collapse id="main-navbar">
-			<Nav className="mr-auto">
+			<Nav>
 
 				<Nav.Link as={Link} to={`${path}/intro`}> HOME</Nav.Link>
 
@@ -120,8 +106,8 @@ const MenuBarContent = (props: CommonProps) => {
 
 export const MenuBar = (props: CommonProps) =>
 	<Navbar bg="light" expand="lg">
-		<MenuBarHeader />
 		<MenuBarContent {...props} />
+		<Navbar.Toggle aria-controls="basic-navbar-nav" />
 	</Navbar>;
 
 export default MenuBar;

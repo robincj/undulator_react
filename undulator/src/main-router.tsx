@@ -13,8 +13,7 @@ import EntriesList from './main/entries-list/entries-list';
 // Need to pass props from links to routes
 
 export const Main = (routerProps) => {
-  let { path, url } = useRouteMatch();
-  console.log({ path, url });
+  let { path } = useRouteMatch();
   return <Switch>
     <Route path={path} exact render={(props) => (<Intro {...props} {...routerProps} />)} />
     <Route path={`${path}/intro`} exact render={(props) => (<Intro {...props} {...routerProps} />)} />
