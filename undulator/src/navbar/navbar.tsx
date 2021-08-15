@@ -8,6 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import ToolTip from '../components/tooltip/tooltip';
+import { bannerImagePath } from '../banner-image/banner-image';
 
 import './navbar.scss';
 
@@ -27,7 +28,7 @@ const DropLink = (props: DropLinkProps) => {
 let dropKey = 1;
 const DropLinks = (props: { links: ([string, string] | ReactElement | null | false)[] }) => {
 	return <>{props.links.filter(p => p).map(p => {
-		return p instanceof Array ? <DropLink text={p[0]} url={p[1]} /> : p;
+		return p instanceof Array ? <DropLink text={p[0]} url={p[1]} key={`navdroplinks${keyNum++}`} /> : p;
 	})}</>
 };
 
@@ -96,7 +97,8 @@ const MenuBarContent = (props: CommonProps) => {
 				<ToolTip
 					placement={"left"} id={'other_event_tooltip'} tip={a100 ? 'For something a little lighter, try the 1-day Aorangi Undulator'
 						: 'Sounds too easy? Try the Aorangi Undulator 100'}>
-					<Nav.Link as={Link} to={`/${props.otherEvent.name}`} className={'other_event_link'} ><Image src={`images/logos/${props.otherEvent.name}_banner.png`} />
+					<Nav.Link as={Link} to={`/${props.otherEvent.name}`} className={'other_event_link'} >
+						<Image src={bannerImagePath(props.otherEvent)} />
 					</Nav.Link>
 				</ToolTip>
 			</Nav >

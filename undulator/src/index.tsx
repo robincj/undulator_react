@@ -12,6 +12,8 @@ import ShareSection from './share-section/share-section';
 import LinksColumn from './links-column/links-column';
 import BannerImage from './banner-image/banner-image';
 
+import 'index.scss';
+
 export interface EventType { name: "AU" | 'A100', displayName: string, longName: string }
 
 export interface CommonProps {
@@ -68,20 +70,18 @@ const EventPage = (props: EventPageProps) => {
 
 		<Navbar otherEvent={otherEvent} currentEvent={currentEvent} />
 
-		<div className="container">
-			<div className="row">
-				<div className="col-xs-12 col-md-2 text-center">
-					<LinksColumn currentEvent={currentEvent} />
-				</div>
+		<div className="main-container">
+			<span className="links-col-container">
+				<LinksColumn currentEvent={currentEvent} />
+			</span>
 
-				<div id="main" className="maincontent col-xs-12 col-md-9">
-					<Main otherEvent={otherEvent} currentEvent={currentEvent} />
-				</div>
+			<span className="maincontent">
+				<Main otherEvent={otherEvent} currentEvent={currentEvent} />
+			</span>
 
-				<div className="col-xs-12 col-md-1 share-icon-col text-center">
-					<ShareSection />
-				</div>
-			</div>
+			<span className="share-icon-col-container">
+				<ShareSection />
+			</span>
 		</div>
 	</>;
 };

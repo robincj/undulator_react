@@ -6,7 +6,7 @@ type Props = {
 	currentEvent: EventType;
 }
 
-export const bannerImagePath = (event: EventType) => `images/logos/${event.name}_banner.png`;
+export const bannerImagePath = (event: EventType) => `/images/logos/${event.name}_banner.png`;
 
 export const BannerImage = (props: Props) =>
 	<div className="banner_image_container">

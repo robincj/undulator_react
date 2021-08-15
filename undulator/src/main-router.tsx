@@ -10,10 +10,12 @@ import Enter from './main/enter/enter';
 import Merchandise from './main/merchandise/merchandise';
 import EntriesList from './main/entries-list/entries-list';
 
+import './main/main.scss';
+
 // Need to pass props from links to routes
 
 export const Main = (routerProps) => {
-  let { path } = useRouteMatch();
+  const { path } = useRouteMatch();
   return <Switch>
     <Route path={path} exact render={(props) => (<Intro {...props} {...routerProps} />)} />
     <Route path={`${path}/intro`} exact render={(props) => (<Intro {...props} {...routerProps} />)} />

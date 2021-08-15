@@ -1,5 +1,5 @@
 import {
-    Link
+    Link, useRouteMatch
 } from "react-router-dom";
 import ToolTip from '../../components/tooltip/tooltip';
 import cfg from '../../config';
@@ -28,6 +28,7 @@ export const Intro = (props) => {
     const filePath = `${cfg.ENTRIES_DIR}${fileName}`;
     const entrycount = fileRowCount(filePath);
     const entriesLeft = maxEntries - entrycount;
+    const { path } = useRouteMatch();
 
     let entryMessage: JSX.Element;
 
@@ -41,7 +42,7 @@ export const Intro = (props) => {
             <h4>
                 <ToolTip
                     placement={"left"} id={'waitlist_tooltip'} tip={'Click here to put yourself on the wait-list'}>
-                    <Link to="/enter">Click here to put yourself on the wait-list</Link>
+                    <Link to={`${path}/enter`}>Click here to put yourself on the wait-list</Link>
                 </ToolTip>
             </h4>
         </div >;
@@ -49,7 +50,7 @@ export const Intro = (props) => {
         entryMessage = <div><h4>
             <ToolTip
                 placement={"left"} id={'enter_tooltip'} tip={'Click here to enter'}>
-                <Link to="/enter">Entries are open now!</Link>
+                <Link to={`${path}/enter`}>Entries are open now!</Link>
             </ToolTip>
         </h4>{entriesLeft < maxEntries * 0.8 ?
             <div><h4>Only {entriesLeft} entries Left!</h4></div> : ''}

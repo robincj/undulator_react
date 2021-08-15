@@ -1,6 +1,7 @@
 nav { 
 	.navbar-nav {
-		margin: auto;
+		width: 100%;
+		justify-content: space-evenly;
 	}
 	.other_event_link {
 		padding: 5px;
