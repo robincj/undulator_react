@@ -1,0 +1,10 @@
+
+#merchandise-form {
+    %form-element { display: 'inline-block'; vertical-align: 'middle'; text-align: 'right'; float: 'left'; margin-right: '10px'; }
+
+    label {@extend %form-element;}
+    
+    input, select { @extend %form-element; width: '6em'; }
+
+    
+}

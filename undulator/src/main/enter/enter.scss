@@ -1,0 +1,19 @@
+
+input[type=number] {
+    width: 6em;
+}
+
+.completed-events {
+    label, input {
+        vertical-align: middle; text-align: right; float: left; margin-right: 10px;
+    }
+}
+
+.team-note {
+    font-weight: bold;
+    color: red;
+}
+
+.text-red {
+    color: red;
+}
