@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import dayjs from 'dayjs';
-import { Form, Row, Col } from 'react-bootstrap'
+import { Form, Row, Col, FloatingLabel } from 'react-bootstrap'
 import DateFormat from 'components/date-format/date-format';
 import cfg from '../../config';
 import { CommonProps, EventType } from '../../index';
@@ -42,19 +42,19 @@ interface InputFieldProps {
 }
 
 const InputField = ({ label, id, placeholder, type, required, title }: InputFieldProps) => {
-    return <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-        <Form.Label column sm={2}>
-            {label}
-        </Form.Label>
-        <Col sm={10}>
+    return <Form.Group as={Row} controlId={id}>
+        <FloatingLabel
+            controlId={id}
+            label={label}
+        >
             {type === 'textarea' ?
-                <Form.Control as={type} placeholder={placeholder || label} id={id} name={id}
+                <Form.Control as={type} placeholder={placeholder || label}
                     required={required || false} title={title || label} ></Form.Control>
                 :
-                <Form.Control type={type} placeholder={placeholder || label} id={id} name={id}
+                <Form.Control type={type} placeholder={placeholder || label}
                     required={required || false} title={title || label} ></Form.Control>
             }
-        </Col>
+        </FloatingLabel>
     </Form.Group>
 };
 
@@ -85,13 +85,12 @@ const EntryForm = (props: EntryFormProps) => {
             <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                 <Form.Label column sm={2}>        Weakness        </Form.Label>
                 <Col sm={10}>
-                    <Form.Select aria-label="Event selection">
-                    <select name="event" id="event" className='form-control' required>
-                    <option id="event_option_AU" value="au" selected={props.selectedEventName !== 'A100'} onClick={() => props.setSelectedEventName('AU')}>Not
-                    Weak: Aorangi Undulator (33km mountain run)</option>
-                    <option id="event_option_A100" value="A100" selected={props.selectedEventName === 'A100'} onClick={() => props.setSelectedEventName('A100')}>Definitely Not Weak:
-                    A100 (100km, 3 day event)</option>
-                    </select>
+                    <Form.Select aria-label="Event selection" name="event" id="event" className='form-control' required>
+                        <option id="event_option_AU" value="au" selected={props.selectedEventName !== 'A100'} onClick={() => props.setSelectedEventName('AU')}>Not
+                            Weak: Aorangi Undulator (33km mountain run)</option>
+                        <option id="event_option_A100" value="A100" selected={props.selectedEventName === 'A100'} onClick={() => props.setSelectedEventName('A100')}>Definitely Not Weak:
+                            A100 (100km, 3 day event)</option>
+                    </Form.Select>
                 </Col>
             </Form.Group>
 

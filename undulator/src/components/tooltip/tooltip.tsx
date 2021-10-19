@@ -1,12 +1,12 @@
 import OverlayTrigger, { OverlayTriggerRenderProps } from 'react-bootstrap/OverlayTrigger';
 import OverlayToolTip from 'react-bootstrap/Tooltip';
-import { Placement } from 'react-bootstrap/Overlay';
+import { Placement } from 'react-bootstrap/esm/types';
 
 interface Props {
     key?: string;
-    placement?: Placement;
     id?: string;
     tip: string;
+    placement: Placement | undefined;
     children: React.ReactElement | ((props: OverlayTriggerRenderProps) => React.ReactNode);
 }
 
