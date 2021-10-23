@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import dayjs from 'dayjs';
-import { Form, Row, Col, FloatingLabel } from 'react-bootstrap'
+import { Form, Row, Col } from 'react-bootstrap'
 import DateFormat from 'components/date-format/date-format';
 import cfg from '../../config';
 import { CommonProps, EventType } from '../../index';
@@ -37,24 +37,23 @@ interface InputFieldProps {
     id: string,
     placeholder?: string,
     title?: string,
+    subtext?: string,
     type?: 'email' | 'text' | 'textarea',
     required?: boolean,
 }
 
-const InputField = ({ label, id, placeholder, type, required, title }: InputFieldProps) => {
+const InputField = ({ label, id, placeholder, type, required, title, subtext }: InputFieldProps) => {
+
     return <Form.Group as={Row} controlId={id}>
-        <FloatingLabel
-            controlId={id}
-            label={label}
-        >
-            {type === 'textarea' ?
-                <Form.Control as={type} placeholder={placeholder || label}
-                    required={required || false} title={title || label} ></Form.Control>
-                :
-                <Form.Control type={type} placeholder={placeholder || label}
-                    required={required || false} title={title || label} ></Form.Control>
-            }
-        </FloatingLabel>
+        <Form.Label htmlFor={id}>{label}</Form.Label>
+        {type === 'textarea' ?
+            <Form.Control as={type} placeholder={placeholder || label}
+                required={required || false} title={title || label} ></Form.Control>
+            :
+            <Form.Control type={type || 'text'} placeholder={placeholder || label}
+                required={required || false} title={title || label} ></Form.Control>
+        }
+        {subtext ? <Form.Text>{subtext}</Form.Text> : ''}
     </Form.Group>
 };
 
@@ -76,6 +75,7 @@ const EntryForm = (props: EntryFormProps) => {
             full name as the reference. Payment would be appreciated within 7 days
             of registering.
         </p>
+
         <Form id="enter" name="enter">
             <InputField label="First name" id="firstname" required={true} />
             <InputField label="Last name" id="surname" required={true} />
