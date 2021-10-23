@@ -5,6 +5,7 @@ import ToolTip from '../../components/tooltip/tooltip';
 import cfg from '../../config';
 import AUIntro from './au_intro';
 import A100Intro from './a100_intro';
+import CovidInfo from './covid';
 
 import './intro.scss';
 
@@ -60,7 +61,8 @@ export const Intro = (props) => {
     return <div>
         <div className='entry-message'>{entryMessage}</div>
         {introInfo}
-    </div>;
+        <CovidInfo />
+    </div >;
 
     /*
     
