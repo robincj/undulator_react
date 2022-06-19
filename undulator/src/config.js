@@ -1,4 +1,4 @@
-const eventYear = 2021;
+const eventYear = 2022;
 const now = new Date();
 
 const configuration = {

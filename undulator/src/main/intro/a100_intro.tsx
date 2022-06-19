@@ -1,7 +1,7 @@
 import {
     Link
 } from "react-router-dom";
-import Date from '../../components/date-format/date-format';
+import Date from '../../components/date-helper/date-helper';
 import cfg from '../../config';
 
 interface Props {
@@ -10,9 +10,9 @@ interface Props {
 
 export const A100Intro = (props: Props) =>
     <div className="text-center">
-        <h3><Date format='dddd DS MMMM, YYYY'>{cfg.DATE_A100_DAY1}</Date>
+        <h3><Date.DateFormat format='dddd DS MMMM, YYYY'>{cfg.DATE_A100_DAY1}</Date.DateFormat>
             {' to '}
-            <Date format='dddd DS MMMM, YYYY'>{cfg.DATE_A100_DAY3}</Date></h3>
+            <Date.DateFormat format='dddd DS MMMM, YYYY'>{cfg.DATE_A100_DAY3}</Date.DateFormat></h3>
 
         <p> The <em>Aorangi Undulator 100</em> is a trail-running race in which competitors cover over 100km in 3 days.<br />
             It starts south-east of Wellington, on the Eastbourne coastline,

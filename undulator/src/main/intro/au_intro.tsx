@@ -1,7 +1,7 @@
 import {
     Link
 } from "react-router-dom";
-import Date from '../../components/date-format/date-format';
+import Date from '../../components/date-helper/date-helper';
 import cfg from '../../config';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 export const AUIntro = (props: Props) =>
     <div className="text-center">
-        <h3><Date format='dddd DS MMMM, YYYY'>{cfg.DATE_AU}</Date></h3>
+        <h3><Date.DateFormat format='dddd DS MMMM, YYYY'>{cfg.DATE_AU}</Date.DateFormat></h3>
 
         <p>
             The Aorangi Undulator is a 33km trail-running race which takes
